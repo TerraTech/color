@@ -124,7 +124,15 @@ func New(value ...Attribute) *Color {
 		c.noColor = boolPtr(true)
 	}
 
-	c.Add(value...)
+	noItalic := make([]Attribute, 0)
+	for _, a := range value {
+		if a == Italic {
+			continue
+		}
+		noItalic = append(noItalic, a)
+	}
+
+	c.Add(noItalic...)
 	return c
 }
 
